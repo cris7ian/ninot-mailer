@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/cris7ian/ninot-mailer#readme",
   "dependencies": {
+    "axios": "^0.17.1",
     "micro": "^9.1.0"
   }
 }
