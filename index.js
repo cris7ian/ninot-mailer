@@ -19,8 +19,8 @@ module.exports = (req, res) => {
     .then(js => sendMail(
         {
           from: 'Info <info@ninotcuina.com>',
-          to: 'Cris <cristiancaroli@gmail.com>',
-          subject: 'info',
+          to: 'Info <info@ninotcuina.com>',
+          subject: 'contact form request',
           text: `
           ${js.name} ${js.email}
 
