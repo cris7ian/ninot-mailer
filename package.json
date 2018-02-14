@@ -1,0 +1,23 @@
+{
+  "name": "ninot-mailer",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "micro -p ${PORT:-3000}"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cris7ian/ninot-mailer.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/cris7ian/ninot-mailer/issues"
+  },
+  "homepage": "https://github.com/cris7ian/ninot-mailer#readme",
+  "dependencies": {
+    "micro": "^9.1.0"
+  }
+}
