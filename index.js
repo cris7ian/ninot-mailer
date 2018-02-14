@@ -35,7 +35,7 @@ module.exports = (req, res) => {
         })
       ).then(result => {
         console.log(result)
-        return res.end()
+        return res.end(JSON.stringify(result))
       })
       .catch(error => {
         console.log(error)
