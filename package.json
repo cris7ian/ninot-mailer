@@ -19,6 +19,7 @@
   "homepage": "https://github.com/cris7ian/ninot-mailer#readme",
   "dependencies": {
     "axios": "^0.17.1",
+    "mailgun-js": "^0.15.0",
     "micro": "^9.1.0"
   }
 }

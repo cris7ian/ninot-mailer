@@ -1,32 +1,44 @@
 const {json} = require('micro')
 const post = require('axios').post
-// require 'rest-client'
-//
-// API_KEY = ENV['MAILGUN_API_KEY']
-// API_URL = "https://api:#{API_KEY}@api.mailgun.net/v2/<your-mailgun-domain>"
-//
-// RestClient.post API_URL+"/messages",
-//     :from => "ev@example.com",
-//     :to => "ev@mailgun.net",
-//     :subject => "This is subject",
-//     :text => "Text body",
-//     :html => "<b>HTML</b> version of the body!"
+
+const api_key = process.env.MAILGUN_API_KEY;
+const domain = process.env.MAILGUN_DOMAIN;
+const mailgun = require('mailgun-js')({apiKey: api_key, domain: domain});
+
+const sendMail = (data) => new Promise((resolve, reject) => {
+  mailgun.messages().send(data, function (error, body) {
+    if (error) return reject(error)
+    return resolve(body)
+  });
+})
+
 
 module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   json(req)
-    .then(js => post(`https://api:${process.env.MAILGUN_API_KEY}@api.mailgun.net/v2/${process.env.MAILGUN_DOMAIN}`,
+    .then(js => sendMail(
         {
-          from: 'info@ninotcuina.com',
-          to: 'cristiancaroli@gmail.com',
+          from: 'Info <info@ninotcuina.com>',
+          to: 'Cris <cristiancaroli@gmail.com>',
           subject: 'info',
           text: `
-          ${js.name} <${js.email}>
+          ${js.name} ${js.email}
 
           ${js.body}
+          `,
+          html: `
+          From: ${js.name}, ${js.email}
+          <br>
+          <br>
+          ${js.body}
           `
-        }
-      ).then(result => res.end(JSON.stringify(result)))
-    })
-    .catch(error => res.end("error"))
+        })
+      ).then(result => {
+        console.log(result)
+        return res.end()
+      })
+      .catch(error => {
+        console.log(error)
+        return res.end(error.toString())
+      })
 }
