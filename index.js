@@ -15,8 +15,7 @@ const post = require('axios').post
 module.exports = (req, res) => {
   res.setHeader('Access-Control-Allow-Origin', '*')
   json(req)
-    .then(js => {
-      post(`https://api:${process.env.MAILGUN_API_KEY}@api.mailgun.net/v2/${process.env.MAILGUN_DOMAIN}`,
+    .then(js => post(`https://api:${process.env.MAILGUN_API_KEY}@api.mailgun.net/v2/${process.env.MAILGUN_DOMAIN}`,
         {
           from: 'info@ninotcuina.com',
           to: 'cristiancaroli@gmail.com',
@@ -27,7 +26,7 @@ module.exports = (req, res) => {
           ${js.body}
           `
         }
-      ).then(result => res.end("ok"))
+      ).then(result => res.end(JSON.stringify(result)))
     })
     .catch(error => res.end("error"))
 }
